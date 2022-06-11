@@ -6,13 +6,15 @@
  * @author Sobolenko S.
  * @brief Модуль з об'явленням ламочки
  * @version 0.1
- * @date 2022-06-10
+ * @date 2022-06-11
  * 
  * @copyright Copyright (c) 2022
  * 
  */
 #include <iostream>
 #include <string>
+#include <sstream>
+#include <fstream>
 
 enum Shape {Candle, Tubular, Globe, Pear, Ogive};
 enum PlinthType {E14, E27, E40};
@@ -41,21 +43,9 @@ class Lamp {
         /**
          * @brief Constructor with params
          * 
-         * @param isTurnedOn 
-         * @param isBroken 
-         * @param manufacturer 
-         * @param leftStarts 
-         * @param wattPerHour 
-         * @param shape 
-         * @param plinthType 
+         * @param input 
          */
-        Lamp(bool isTurnedOn,
-             bool isBroken,
-             std::string manufacturer,
-             int leftStarts,
-             int wattPerHour,
-             enum Shape shape,
-             enum PlinthType plinthType);
+        Lamp(std::string input);
         
         /**
          * @brief Constructor of copying
@@ -150,10 +140,23 @@ class Lamp {
         enum PlinthType getPlinthType() const;
 
         /**
-         * @brief Print the object, in string representation, to the console
-         *
+         * @brief Convert to the string representation
+         * 
+         * @return std::string 
          */
-        void print();
+        std::string toString() const;
+
+        Lamp& operator=(const Lamp& other);
+
+        bool operator==(const Lamp& other) const;
+
+        bool operator!=(const Lamp& other) const;
+
+        friend std::ostream& operator<<(std::ostream& output,
+                                        const Lamp& lamp);
+
+        friend std::istream& operator>>(std::istream& input,
+                                        Lamp& lamp);
 };
 
 #endif

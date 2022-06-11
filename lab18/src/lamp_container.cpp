@@ -1,5 +1,5 @@
 /**
- * @file list.cpp
+ * @file lamp_сontainer.cpp
  * @author Sobolenko S.
  * @brief Модуль з реалізацією контейнера
  * @version 0.1
@@ -8,7 +8,15 @@
  * @copyright Copyright (c) 2022
  * 
  */
-#include <list.h>
+#include <lamp_container.h>
+
+
+/* CONSTRUCTOR & DESTRUCTOR */
+
+LampContainer::LampContainer(): size(DEFAULT_ARRAY_SIZE) 
+{
+    this->lamps = new Lamp[DEFAULT_ARRAY_SIZE];
+}
 
 LampContainer::LampContainer(std::string input)
 {
@@ -18,18 +26,24 @@ LampContainer::LampContainer(std::string input)
     this->lamps = new Lamp[(unsigned)size];
 }
 
-LampContainer::LampContainer(const LampContainer& copy)
-{
-    this->lamps = copy.lamps;
-    this->size = copy.size;
+LampContainer::LampContainer(const LampContainer& copy): lamps(copy.lamps),
+                                                         size(copy.size) {}
+
+LampContainer::~LampContainer()
+{ 
+    delete [] this->lamps;
 }
 
-LampContainer::~LampContainer(){ delete [] this->lamps; }
+
+/* GETTERS & SETTERS */
 
 int LampContainer::getSize() const
 {
     return this->size;
 }
+
+
+/* OTHER METHODS */
 
 void LampContainer::append(Lamp& newLamp)
 {
@@ -70,12 +84,12 @@ Lamp& LampContainer::getItem(int pos) const
     return this->lamps[pos];
 }
 
-std::string LampContainer::print() const
+std::string LampContainer::toString() const
 {
     std::stringstream outputStream;
 
     for (int i = 0; i < this->size; i++) {
-        outputStream << this->lamps[i].print();
+        outputStream << this->lamps[i].toString();
 
          if (i != this->size - 1) {
             outputStream << std::endl;
@@ -131,7 +145,7 @@ void LampContainer::writeToFile(const std::string& filePath)
     outputFile.open(filePath);
 
     for (int i = 0; i < this->size; i++) {
-        outputFile << this->lamps[i].print();
+        outputFile << this->lamps[i].toString();
         
         if (i != this->size - 1) {
             outputFile << std::endl;

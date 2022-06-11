@@ -8,7 +8,7 @@
  * @copyright Copyright (c) 2022
  * 
  */
-#include <list.h>
+#include <lamp_container.h>
 
 /**
  * @brief Основна функція
@@ -38,7 +38,7 @@ int main()
 
     myLamps.writeToFile(outputFile);
 
-    std::cout << myLamps.print() << std::endl;
+    std::cout << myLamps.toString() << std::endl;
 
 	return 0;
 }

@@ -10,6 +10,18 @@
  */
 #include <lamp.h>
 
+
+/* CONSTRUCTORS & DESTRUCTOR */
+
+Lamp::Lamp(): isTurnedOn(true),
+                 isBroken(false),
+                 manufacturer("popular_firm"),
+                 leftStarts(1000),
+                 wattPerHour(10),
+                 colourTemperature(1500),
+                 shape(Tubular),
+                 plinthType(E40) {}
+
 Lamp::Lamp(bool isTurnedOn,
            bool isBroken,
            std::string manufacturer,
@@ -27,18 +39,18 @@ Lamp::Lamp(bool isTurnedOn,
     this->plinthType = plinthType;
 }
 
-Lamp::Lamp(const Lamp& copy){
-    this->isTurnedOn = copy.isTurnedOn;
-    this->isBroken = copy.isBroken;
-    this->manufacturer = copy.manufacturer;
-    this->leftStarts = copy.leftStarts;
-    this->wattPerHour = copy.wattPerHour;
-    this->shape = copy.shape;
-    this->plinthType = copy.plinthType;
-}
+Lamp::Lamp(const Lamp& copy): isTurnedOn(copy.isTurnedOn),
+                              isBroken(copy.isBroken),
+                              manufacturer(copy.manufacturer),
+                              leftStarts(copy.leftStarts),
+                              wattPerHour(copy.wattPerHour),
+                              shape(copy.shape),
+                              plinthType(copy.plinthType) {}
 
 Lamp::~Lamp() {}
 
+
+/* GETTERS & SETTERS */
 
 bool Lamp::getIsTurnedOn() const {
     return this->isTurnedOn;
@@ -83,6 +95,9 @@ enum Shape Lamp::getShape() const {
 enum PlinthType Lamp::getPlinthType() const {
     return this->plinthType;
 }
+
+
+/* OTHER METHODS */
 
 void Lamp::print()
 {

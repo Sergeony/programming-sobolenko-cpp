@@ -1,5 +1,5 @@
 CC = $(CLANG_PREFIX)clang++
-LAB_OPTS = -I./src src/entity.cpp src/list.cpp
+LAB_OPTS = -I./src src/lamp.cpp src/lamp_container.cpp
 C_OPTS = -g -Wall -Wextra -Werror -Wformat-security -Wfloat-equal -Wshadow -Wconversion -Wlogical-not-parentheses -Wnull-dereference -Wno-unused-variable -Werror=vla $(LAB_OPTS)
 V_FLAGS=--tool=memcheck --leak-check=full --show-reachable=yes --undef-value-errors=yes --track-origins=no --child-silent-after-fork=no --trace-children=no --error-exitcode=1
 
