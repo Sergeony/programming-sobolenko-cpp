@@ -3,7 +3,7 @@
  * @author Sobolenko S.
  * @brief 
  * @version 0.1
- * @date 2022-06-10
+ * @date 2022-06-11
  *
  * @copyright Copyright (c) 2022
  * 
@@ -18,26 +18,39 @@
  * @return стан проходження тестів: 1 - тести пройшли успішно, 0 - частина
  * тестів не пройшла
  */
-START_TEST(check_manufacturer_test)
+START_TEST(overloaded_operators_test)
 {
-	LampContainer myLamps;
-    
-    Lamp lamp1;
-    Lamp lamp2(false, true, "something", 10, 5, Globe, E27);
-    Lamp lamp3(false, false, "noname", 3, 7, Pear, E14);
+    LampContainer myLamps("3");
 
-    myLamps.append(lamp1);
-    myLamps.append(lamp2);
-    myLamps.append(lamp3);
+    const std::string inputPath = "assets/input.txt";
+    const std::string outputPath = "dist/output.txt";
 
-    myLamps.delItem(1);
+    std::ifstream fin(inputPath);
+    fin >> myLamps;
+    fin.close();
 
-    myLamps.sortByField();
+    std::stringstream inputStream("1 0 test 1000 10 1000 1 2");
+    inputStream >> myLamps[2];
 
-    int expectedLeftStarts = 3;
-    int actual = myLamps.getItem(0).getLeftStarts();
+    std::stringstream resultStream;
+    for (int i = 0; i < myLamps.getSize(); i++) {
+       resultStream << myLamps[i] << std::endl;
+    }
+    std::string resultString = resultStream.str();
 
-    ck_assert_int_eq(actual, expectedLeftStarts);
+    std::string expectedString = "0 0 noname 3 7 3 4 2\n"
+                                 "0 0 noname 3 7 3 4 2\n"
+                                 "1 0 test 1000 10 1000 1 2\n";
+
+    std::cout << expectedString << std::endl << resultString;
+
+    ck_assert(resultString == expectedString);
+
+    bool areEqual = myLamps[0] == myLamps[1];
+    ck_assert(areEqual);
+
+    bool areNotEqual = myLamps[1] != myLamps[2];
+    ck_assert(areNotEqual);
 }
 END_TEST
 
@@ -55,9 +68,9 @@ END_TEST
 int main(void)
 {
     Suite *s = suite_create("Programming");
-    TCase *tc_core = tcase_create("Lab17");
+    TCase *tc_core = tcase_create("Lab19");
 
-    tcase_add_test(tc_core, check_manufacturer_test);
+    tcase_add_test(tc_core, overloaded_operators_test);
     suite_add_tcase(s, tc_core);
 
     SRunner *sr = srunner_create(s);

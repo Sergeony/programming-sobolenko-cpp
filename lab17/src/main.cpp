@@ -8,8 +8,9 @@
  * @copyright Copyright (c) 2022
  * 
  */
-#include <lamp.h>
-#include <lamps.h>
+
+#include <lamp_container.h>
+
 /**
  * @brief Основна функція
  * 
@@ -25,29 +26,23 @@
  */
 int main()
 {
-	LampContainer *myLamps = new LampContainer();
+	LampContainer myLamps;
     
-    Lamp *lamp1 = new Lamp();
-    Lamp *lamp2 = new Lamp(false, true, "something", 10, 5, Globe, E27);
-    Lamp *lamp3 = new Lamp(false, false, "noname", 3, 7, Pear, E14);
-    Lamp *lamp4 = new Lamp(*lamp3);
+    Lamp lamp1;
+    Lamp lamp2(false, true, "something", 10, 5, Globe, E27);
+    Lamp lamp3(false, false, "noname", 3, 7, Pear, E14);
+    Lamp lamp4(lamp3);
 
-    myLamps->append(*lamp1);
-    myLamps->append(*lamp2);
-    myLamps->append(*lamp3);
-    myLamps->append(*lamp4);
+    myLamps.append(lamp1);
+    myLamps.append(lamp2);
+    myLamps.append(lamp3);
+    myLamps.append(lamp4);
 
-    myLamps->delItem(1);
+    myLamps.delItem(1);
 
-    myLamps->sortByField();
+    myLamps.sortByField();
 
-    myLamps->print();
-
-    delete lamp1;
-    delete lamp2;
-    delete lamp3;
-    delete lamp4;
-    delete myLamps;
-
+    myLamps.print();
+    
 	return 0;
 }

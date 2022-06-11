@@ -1,5 +1,5 @@
 /**
- * @file entity.cpp
+ * @file lamp.cpp
  * @author Sobolenko S.
  * @brief Модуль з реалізацією лампочки
  * @version 0.1
@@ -8,7 +8,19 @@
  * @copyright Copyright (c) 2022
  * 
  */
-#include <entity.h>
+#include <lamp.h>
+
+
+/* CONSTRUCTORS & DESTRUCTOR */
+
+Lamp::Lamp(): isTurnedOn(true),
+              isBroken(false),
+              manufacturer("popular_firm"),
+              leftStarts(1000),
+              wattPerHour(10),
+              colourTemperature(1500),
+              shape(Tubular),
+              plinthType(E40) {}
 
 Lamp::Lamp(std::string input)
 {
@@ -52,18 +64,18 @@ Lamp::Lamp(std::string input)
     }
 }
 
-Lamp::Lamp(const Lamp& copy){
-    this->isTurnedOn = copy.isTurnedOn;
-    this->isBroken = copy.isBroken;
-    this->manufacturer = copy.manufacturer;
-    this->leftStarts = copy.leftStarts;
-    this->wattPerHour = copy.wattPerHour;
-    this->shape = copy.shape;
-    this->plinthType = copy.plinthType;
-}
+Lamp::Lamp(const Lamp& copy): isTurnedOn(copy.isTurnedOn),
+                              isBroken(copy.isBroken),
+                              manufacturer(copy.manufacturer),
+                              leftStarts(copy.leftStarts),
+                              wattPerHour(copy.wattPerHour),
+                              shape(copy.shape),
+                              plinthType(copy.plinthType) {}
 
 Lamp::~Lamp() {}
 
+
+/* GETTERS & SETTERS */
 
 bool Lamp::getIsTurnedOn() const {
     return this->isTurnedOn;
@@ -109,7 +121,10 @@ enum PlinthType Lamp::getPlinthType() const {
     return this->plinthType;
 }
 
-std::string Lamp::print() const
+
+/* OTHER METHODS */
+
+std::string Lamp::toString() const
 {
     std::stringstream outputStream;
 
@@ -122,7 +137,7 @@ std::string Lamp::print() const
                  << this->shape << " "
                  << this->plinthType;
 
-    const std::string output = outputStream.str();
+    std::string output = outputStream.str();
 
     return output;
 }

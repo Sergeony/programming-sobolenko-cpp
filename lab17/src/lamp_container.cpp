@@ -1,5 +1,5 @@
 /**
- * @file lamps.cpp
+ * @file lamp_container.cpp
  * @author Sobolenko S.
  * @brief Модуль з реалізацією контейнера
  * @version 0.1
@@ -8,7 +8,15 @@
  * @copyright Copyright (c) 2022
  * 
  */
-#include <lamps.h>
+#include <lamp_container.h>
+
+
+/* CONSTRUCTOR & DESTRUCTOR */
+
+LampContainer::LampContainer(): size(DEFAULT_ARRAY_SIZE)
+{
+    this->lamps = new Lamp[DEFAULT_ARRAY_SIZE];
+}
 
 LampContainer::LampContainer(int size)
 {
@@ -16,18 +24,24 @@ LampContainer::LampContainer(int size)
     this->size = size;
 }
 
-LampContainer::LampContainer(const LampContainer& copy)
-{
-    this->lamps = copy.lamps;
-    this->size = copy.size;
+LampContainer::LampContainer(const LampContainer& copy): lamps(copy.lamps),
+                                                         size(copy.size) {}
+
+LampContainer::~LampContainer()
+{ 
+    delete [] this->lamps;
 }
 
-LampContainer::~LampContainer(){ delete [] this->lamps; }
+
+/* GETTERS & SETTERS */
 
 int LampContainer::getSize() const
 {
     return this->size;
 }
+
+
+/* OTHER METHODS */
 
 void LampContainer::append(Lamp& newLamp)
 {
@@ -63,12 +77,12 @@ void LampContainer::delItem(int pos)
      this->lamps = newLamps;
 }
 
-Lamp& LampContainer::getItem(int pos)
+Lamp& LampContainer::getItem(int pos) const
 {
     return this->lamps[pos];
 }
 
-void LampContainer::print()
+void LampContainer::print() const
 {
     for (int i = 0; i < this->size; i++) {
         this->lamps[i].print();
