@@ -3,13 +3,13 @@
  * @author Sobolenko S.
  * @brief Головний модуль для демонстрації виконаною роботи
  * @version 0.1
- * @date 2022-06-10
+ * @date 2022-06-11
  * 
  * @copyright Copyright (c) 2022
  * 
  */
-#include <lamp.h>
-#include <lamps.h>
+#include <list.h>
+
 /**
  * @brief Основна функція
  * 
@@ -25,29 +25,20 @@
  */
 int main()
 {
-	LampContainer *myLamps = new LampContainer();
-    
-    Lamp *lamp1 = new Lamp();
-    Lamp *lamp2 = new Lamp(false, true, "something", 10, 5, Globe, E27);
-    Lamp *lamp3 = new Lamp(false, false, "noname", 3, 7, Pear, E14);
-    Lamp *lamp4 = new Lamp(*lamp3);
+	LampContainer myLamps;
 
-    myLamps->append(*lamp1);
-    myLamps->append(*lamp2);
-    myLamps->append(*lamp3);
-    myLamps->append(*lamp4);
+    const std::string inputFile = "assets/input.txt";
+    const std::string outputFile = "dist/output.txt";
 
-    myLamps->delItem(1);
+    myLamps.readFromFile(inputFile);
 
-    myLamps->sortByField();
+    myLamps.delItem(1);
 
-    myLamps->print();
+    myLamps.sortByField();
 
-    delete lamp1;
-    delete lamp2;
-    delete lamp3;
-    delete lamp4;
-    delete myLamps;
+    myLamps.writeToFile(outputFile);
+
+    std::cout << myLamps.print() << std::endl;
 
 	return 0;
 }
