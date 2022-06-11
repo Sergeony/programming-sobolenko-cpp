@@ -28,15 +28,12 @@
 
 #### Клас лампочки
 
-```c
-        /**
-         * @brief Базовий клас - лампочка
-         */
+```c++
         class Lamp {
             private:
                 bool isTurnedOn;
                 bool isBroken;
-                string manufacturer;
+                std::string manufacturer;
                 int leftStarts;
                 int wattPerHour;
                 int colourTemperature;
@@ -44,18 +41,11 @@
                 enum PlinthType plinthType;
             
             public:
-                Lamp() : isTurnedOn(true),
-                        isBroken(false),
-                        manufacturer("Meizu"),
-                        leftStarts(1000),
-                        wattPerHour(10),
-                        colourTemperature(1500),
-                        shape(Tubular),
-                        plinthType(E40) {}
-                
+                Lamp();
+
                 Lamp(bool isTurnedOn,
                     bool isBroken,
-                    string manufacturer,
+                    std::string manufacturer,
                     int leftStarts,
                     int wattPerHour,
                     enum Shape shape,
@@ -66,14 +56,17 @@
                 ~Lamp();
 
                 bool getIsTurnedOn() const;
+                
                 void setIsTurnedOn(bool newIsTurnedOn);
 
                 bool getIsBroken() const;
+
                 void setIsBroken(bool newIsBroken);
 
-                string getManufacturer() const;
+                std::string getManufacturer() const;
 
                 int getLeftStarts() const;
+
                 void setLeftStarts(int newLeftStarts);
 
                 int getWattPerHour() const;
@@ -90,21 +83,17 @@
 
 ### Клас контейнера
 
-```c
-/**
- * @brief Клас-контейнер для класу Lamp
- */
+```c++
         class LampContainer {
             private:
                 Lamp *lamps;
                 int size;
             
             public:
-                LampContainer(): size(DEFAULT_ARRAY_SIZE)
-                {
-                    this->lamps = new Lamp[DEFAULT_ARRAY_SIZE];
-                }
+                LampContainer();
+
                 explicit LampContainer(int size);
+
                 LampContainer(const LampContainer& copy);
 
                 ~LampContainer();
@@ -115,9 +104,9 @@
 
                 void delItem(int pos);
 
-                Lamp& getItem(int pos);
+                Lamp& getItem(int pos) const;
 
-                void print();
+                void print() const;
 
                 void sortByField();
         };
@@ -139,7 +128,7 @@
 
 **Варіант використання 2**: запустити тести у консолі:
 
-59% поркиття є задовільною кількістю для даної роботи. Але взагалі, краще коли б були покриті усі функції.
+60% поркиття є задовільною кількістю для даної роботи.
 
 ```
         Running suite(s): Programming
@@ -158,11 +147,11 @@
 
 **Витоків пам'яті немає**
 ```
-        ==179321== HEAP SUMMARY:
-        ==179321==     in use at exit: 0 bytes in 0 blocks
-        ==179321==   total heap usage: 13 allocs, 13 frees, 74,880 bytes allocated
-        ==179321== 
-        ==179321== All heap blocks were freed -- no leaks are possible
+        ==233452== HEAP SUMMARY:
+        ==233452==     in use at exit: 0 bytes in 0 blocks
+        ==233452==   total heap usage: 8 allocs, 8 frees, 74,608 bytes allocated
+        ==233452== 
+        ==233452== All heap blocks were freed -- no leaks are possible
 ```
 
 ## Висновки

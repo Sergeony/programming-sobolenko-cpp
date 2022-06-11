@@ -40,18 +40,18 @@
 ### Метод конвертації об'єкту до строки
 
 ```c++
-        std::string Lamp::print() const
+        std::string Lamp::toString() const
         {
             std::stringstream outputStream;
 
             outputStream << this->isTurnedOn << " " 
-                        << this->isBroken << " " 
-                        << this->manufacturer << " "
-                        << this->leftStarts << " "
-                        << this->wattPerHour << " "
-                        << this->colourTemperature << " "
-                        << this->shape << " "
-                        << this->plinthType;
+                         << this->isBroken << " " 
+                         << this->manufacturer << " "
+                         << this->leftStarts << " "
+                         << this->wattPerHour << " "
+                         << this->colourTemperature << " "
+                         << this->shape << " "
+                         << this->plinthType;
 
             const std::string output = outputStream.str();
 
@@ -62,24 +62,24 @@
 ### Метод считування з файлу
 
 ```c++
-void LampContainer::readFromFile(const std::string& filePath)
-{
-    std::ifstream inputFile;
-    std::string lampString;
+        void LampContainer::readFromFile(const std::string& filePath)
+        {
+            std::ifstream inputFile;
+            std::string lampString;
 
-    inputFile.open(filePath);
-    
-    while (!inputFile.eof())
-    {    
-        getline(inputFile, lampString);
+            inputFile.open(filePath);
+            
+            while (!inputFile.eof())
+            {    
+                getline(inputFile, lampString);
 
-        Lamp lamp(lampString);
+                Lamp lamp(lampString);
 
-        this->append(lamp);
-    }
+                this->append(lamp);
+            }
 
-    inputFile.close();
-}
+            inputFile.close();
+        }
 ```
 
 ### Метод запису до файлу
@@ -92,7 +92,7 @@ void LampContainer::readFromFile(const std::string& filePath)
             outputFile.open(filePath);
 
             for (int i = 0; i < this->size; i++) {
-                outputFile << this->lamps[i].print();
+                outputFile << this->lamps[i].toString();
                 
                 if (i != this->size - 1) {
                     outputFile << std::endl;
@@ -102,7 +102,6 @@ void LampContainer::readFromFile(const std::string& filePath)
             outputFile.close();
         }
 ```
-### Функція видалення елементу за індексом
 
 ## Варіанти використання
 
@@ -118,7 +117,7 @@ void LampContainer::readFromFile(const std::string& filePath)
 
 **Варіант використання 2**: запустити тести у консолі:
 
-71% поркиття є задовільною кількістю для даної роботи. Але взагалі, краще коли б були покриті усі функції.
+71% поркиття є задовільною кількістю для даної роботи.
 
 ```
         Running suite(s): Programming

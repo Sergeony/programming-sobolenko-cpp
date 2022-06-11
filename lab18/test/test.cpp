@@ -8,7 +8,7 @@
  * @copyright Copyright (c) 2022
  * 
  */
-#include "../src/list.h"
+#include <../src/lamp_container.h>
 #include <check.h>
 
 /**
