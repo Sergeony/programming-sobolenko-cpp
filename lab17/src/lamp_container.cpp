@@ -35,6 +35,10 @@ LampContainer::~LampContainer()
 
 /* GETTERS & SETTERS */
 
+Lamp& LampContainer::getLamps() {
+    return *this->lamps;
+}
+
 int LampContainer::getSize() const
 {
     return this->size;
@@ -50,31 +54,27 @@ void LampContainer::append(Lamp& newLamp)
     for (int i = 0; i < this->size; i++) {
         newLamps[i] = this->lamps[i];
     }
-    
     newLamps[this->size] = newLamp;
-    this->size++;
 
     delete [] this->lamps;
     this->lamps = newLamps;
+    this->size++;
 }
 
 void LampContainer::delItem(int pos)
 {
      Lamp *newLamps = new Lamp[(unsigned)this->size -1];
 
-     for (int i = 0, j = 0; j < this->size; i++, j++) {
-         if (j == pos) {
-             i--;
-             continue;
-         }
-         
-         newLamps[i] = this->lamps[j];
+     for (int i = 0; i < pos; i++) {        
+         newLamps[i] = this->lamps[i];
      }
-
-     this->size--;
+     for (int i = pos + 1; i < this->size; i++) {
+         newLamps[i - 1] = this->lamps[i];
+     }
 
      delete [] this->lamps;
      this->lamps = newLamps;
+     this->size--;
 }
 
 Lamp& LampContainer::getItem(int pos) const
@@ -92,16 +92,16 @@ void LampContainer::print() const
 void LampContainer::sortByField()
 {
     for (int i = 0; i < this->size; i++) {
-        for (int j = 1; j < this->size; j++) {
+        for (int j = 0; j < this->size - i - 1; j++) {
 
             int curr_el = this->lamps[j].getLeftStarts();
-            int prew_el = this->lamps[j - 1].getLeftStarts();
+            int next_el = this->lamps[j + 1].getLeftStarts();
 
-            if (curr_el < prew_el) {
+            if (curr_el > next_el) {
                 Lamp temp = this->lamps[j];
 
-                this->lamps[j] = this->lamps[j - 1];
-                this->lamps[j - 1] = temp;
+                this->lamps[j] = this->lamps[j + 1];
+                this->lamps[j + 1] = temp;
             }
         }
     }

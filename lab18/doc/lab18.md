@@ -91,13 +91,10 @@
 
             outputFile.open(filePath);
 
-            for (int i = 0; i < this->size; i++) {
-                outputFile << this->lamps[i].toString();
-                
-                if (i != this->size - 1) {
-                    outputFile << std::endl;
-                }
+            for (int i = 0; i < this->size - 1; i++) {
+                outputFile << this->lamps[i].toString() << std::endl;
             }
+            outputFile << this->lamps[this->size - 1].toString();
 
             outputFile.close();
         }

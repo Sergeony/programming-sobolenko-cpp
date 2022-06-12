@@ -44,12 +44,12 @@
                 Lamp();
 
                 Lamp(bool isTurnedOn,
-                    bool isBroken,
-                    std::string manufacturer,
-                    int leftStarts,
-                    int wattPerHour,
-                    enum Shape shape,
-                    enum PlinthType plinthType);
+                     bool isBroken,
+                     std::string manufacturer,
+                     int leftStarts,
+                     int wattPerHour,
+                     enum Shape shape,
+                     enum PlinthType plinthType);
                 
                 Lamp(const Lamp& copy);
 
@@ -98,6 +98,8 @@
 
                 ~LampContainer();
 
+                Lamp& getLamps();
+
                 int getSize() const;
 
                 void append(Lamp& newLamp);
@@ -111,7 +113,6 @@
                 void sortByField();
         };
 ```
-### Функція видалення елементу за індексом
 
 ## Варіанти використання
 

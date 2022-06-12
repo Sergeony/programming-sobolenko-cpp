@@ -40,13 +40,13 @@
 ```c++
         bool Lamp::operator==(const Lamp &other) const {
             return this->isTurnedOn == other.isTurnedOn &&
-                this->isBroken == other.isBroken &&
-                this->manufacturer == other.manufacturer &&
-                this->leftStarts == other.leftStarts &&
-                this->wattPerHour == other.wattPerHour &&
-                this->colourTemperature == other.colourTemperature &&
-                this->shape == other.shape &&
-                this->plinthType  == other.plinthType;
+                   this->isBroken == other.isBroken &&
+                   this->manufacturer == other.manufacturer &&
+                   this->leftStarts == other.leftStarts &&
+                   this->wattPerHour == other.wattPerHour &&
+                   this->colourTemperature == other.colourTemperature &&
+                   this->shape == other.shape &&
+                   this->plinthType  == other.plinthType;
         }
 ```
 
@@ -107,7 +107,6 @@
             return inputStream;
         }
 ```
-### Функція видалення елементу за індексом
 
 ## Варіанти використання
 

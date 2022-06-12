@@ -51,6 +51,13 @@ class LampContainer {
         ~LampContainer();
 
         /**
+         * @brief array getter
+         * 
+         * @return LampContainer& 
+         */
+        Lamp& getLamps();
+        
+        /**
          * @brief size getter
          * 
          * @return int 
